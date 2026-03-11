@@ -1,97 +1,113 @@
 ﻿# Backlog MVP - Aubeo
 
-## Regles de priorisation
+## Règles de priorisation
 
-- P0 : indispensable au premier usage credible
-- P1 : important pour stabiliser l'experience MVP
-- P2 : utile ensuite, sans bloquer la premiere version
+- P0 : indispensable pour un MVP crédible
+- P1 : important pour stabiliser et rendre le MVP utile
+- P2 : utile ensuite, sans bloquer le premier cycle produit
 
-## Lot 0 - Cadrage produit et depot
+## Lot 0 - Fondations produit et documentation
 
-### AB-001 - Initialiser la base documentaire
-- Priorite : P0
-- Objectif : poser le README, l'identite produit, le cahier fonctionnel v1 et le backlog MVP.
-- Definition de fini : les documents sont presents, coherents entre eux et limites au perimetre Aubeo.
+- Priorité : P0
+- Objectif : disposer d’un socle documentaire cohérent avant toute implémentation.
+- Contenu :
+  - aligner le README sur la vision produit ;
+  - formaliser l’identité produit ;
+  - formaliser le cahier fonctionnel v1 ;
+  - formaliser un backlog MVP limité au périmètre réel.
+- Dépendances :
+  - aucune
+- Critères d’acceptation :
+  - les documents portent la même promesse produit ;
+  - la séquence lumière -> vibrations douces -> ambiance sonore ou mode expérimental -> réveil final est explicitée partout de manière cohérente ;
+  - aucune promesse médicale ou pseudo-scientifique n’apparaît ;
+  - le périmètre Android d’abord est clair.
 
-## Lot 1 - Coeur du reveil progressif Android
+## Lot 1 - Expérience réveil v1
 
-### AB-010 - Configurer une heure cible de reveil
-- Priorite : P0
-- Objectif : permettre a l'utilisateur de definir l'heure finale du reveil.
-- Critere d'acceptation : une heure cible peut etre enregistree et relue sans ambiguite.
+- Priorité : P0
+- Objectif : rendre possible un réveil progressif complet et compréhensible autour d’une heure cible.
+- Contenu :
+  - définir une heure cible ;
+  - définir une durée totale de préparation ;
+  - proposer des profils de réveil simples ;
+  - régler les intensités maximales de lumière, vibrations et son ;
+  - exécuter la séquence progressive dans l’ordre prévu ;
+  - permettre l’arrêt de la séquence ;
+  - garantir le réveil final à l’heure cible.
+- Dépendances :
+  - lot 0
+- Critères d’acceptation :
+  - un utilisateur peut créer, modifier, activer et désactiver un réveil sans aide externe ;
+  - un réveil comporte au minimum une heure cible, une durée de préparation et un profil ;
+  - l’ordre des phases est fixe, visible dans l’interface et correspond à l’exécution attendue ;
+  - le réveil final se déclenche si la séquence n’a pas été arrêtée avant l’heure cible ;
+  - le mode expérimental, s’il est présent, est clairement étiqueté comme tel.
 
-### AB-011 - Definir une duree totale de preparation
-- Priorite : P0
-- Objectif : permettre a l'utilisateur de choisir combien de temps avant l'heure cible la sequence commence.
-- Critere d'acceptation : l'heure de debut de sequence est calculee a partir de l'heure cible et de la duree choisie.
+## Lot 2 - Logique adaptative v1
 
-### AB-012 - Declencher la phase lumiere
-- Priorite : P0
-- Objectif : lancer une premiere phase visuelle progressive au debut de la sequence.
-- Critere d'acceptation : l'intensite lumineuse augmente progressivement jusqu'au niveau configure.
+- Priorité : P1
+- Objectif : ajuster légèrement l’anticipation du réveil à partir de signaux simples, locaux et explicables.
+- Contenu :
+  - enregistrer la phase d’arrêt ;
+  - enregistrer le moment d’arrêt par rapport à l’heure cible ;
+  - prendre en compte le feedback post-réveil lorsqu’il est fourni ;
+  - ajuster légèrement le début de préparation à partir de signaux simples et locaux ;
+  - exposer à l’utilisateur l’ajustement appliqué ;
+  - permettre de désactiver l’adaptation et de revenir au réglage manuel.
+- Dépendances :
+  - lot 1
+  - lot 3
+- Critères d’acceptation :
+  - les règles d’ajustement sont explicites ;
+  - aucun changement brutal n’est appliqué ;
+  - l’utilisateur peut comprendre et annuler l’ajustement ;
+  - l’adaptation ne repose sur aucun discours d’analyse scientifique du sommeil.
 
-### AB-013 - Declencher les vibrations douces
-- Priorite : P0
-- Objectif : ajouter une phase haptique progressive apres la lumiere.
-- Critere d'acceptation : les vibrations commencent apres la lumiere selon l'ordre defini et restent dans une intensite douce puis croissante.
+## Lot 3 - Historique et feedback
 
-### AB-014 - Declencher l'ambiance sonore
-- Priorite : P0
-- Objectif : ajouter une phase sonore progressive avant l'heure cible.
-- Critere d'acceptation : le son demarre apres les vibrations et monte jusqu'au niveau configure.
+- Priorité : P1
+- Objectif : conserver une trace locale utile des réveils et recueillir un retour minimal après usage.
+- Contenu :
+  - stocker localement les réveils passés ;
+  - conserver les informations minimales utiles à la compréhension et à l’adaptation ;
+  - proposer un feedback post-réveil court ;
+  - exposer un historique simple des réveils récents.
+- Dépendances :
+  - lot 1
+- Critères d’acceptation :
+  - l’historique reste lisible et non médicalisé ;
+  - le feedback post-réveil ne bloque pas la sortie du réveil ;
+  - seules les données définies comme utiles dans le cahier fonctionnel v1 sont conservées ;
+  - aucune donnée biométrique ou médicale n’est stockée ;
+  - l’utilisateur peut comprendre ce qui est retenu de ses réveils passés.
 
-### AB-015 - Garantir un reveil final a l'heure cible
-- Priorite : P0
-- Objectif : assurer un declenchement final si la sequence preparatoire n'a pas ete arretee avant.
-- Critere d'acceptation : un reveil final distinct se declenche a l'heure cible.
+## Lot 4 - Cadrage technique du cœur du réveil
 
-### AB-016 - Arreter la sequence de reveil
-- Priorite : P0
-- Objectif : permettre a l'utilisateur de couper la sequence lorsqu'il est reveille.
-- Critere d'acceptation : un arret utilisateur met fin a la phase en cours et enregistre localement le moment d'arret.
+- Priorité : P1
+- Objectif : cadrer les points techniques nécessaires au MVP sans entrer trop tôt dans une architecture lourde.
+- Contenu :
+  - cadrer le fonctionnement Android du réveil ;
+  - cadrer les besoins minimaux de stockage local ;
+  - cadrer les besoins liés à la planification locale du réveil ;
+  - cadrer les besoins liés aux canaux lumière, vibrations et son ;
+  - cadrer le fonctionnement hors ligne du cœur du réveil ;
+  - cadrer le traitement du mode expérimental pour qu’il reste optionnel et correctement formulé.
+- Dépendances :
+  - lot 0
+  - lot 1
+- Critères d’acceptation :
+  - les contraintes techniques principales du réveil sont identifiées sans figer prématurément l’architecture ;
+  - les contraintes Android principales sont connues ;
+  - le cœur du réveil ne dépend pas du réseau ;
+  - le vocabulaire produit reste cohérent entre technique et documentation.
 
-## Lot 2 - Reglages essentiels et lisibilite
+## Ordre recommandé d’exécution
 
-### AB-020 - Regler les intensites maximales
-- Priorite : P1
-- Objectif : laisser l'utilisateur definir le niveau maximal de lumiere, de vibrations et de son.
-- Critere d'acceptation : chaque canal dispose d'un niveau maximal simple a regler et a retrouver.
+1. Lot 0 - Fondations produit et documentation
+2. Lot 1 - Expérience réveil v1
+3. Lot 3 - Historique et feedback
+4. Lot 2 - Logique adaptative v1
+5. Lot 4 - Cadrage technique du cœur du réveil
 
-### AB-021 - Expliquer la sequence de reveil dans l'interface
-- Priorite : P1
-- Objectif : rendre le fonctionnement par phases immediatement compréhensible.
-- Critere d'acceptation : l'utilisateur peut identifier l'ordre des phases et le role du reveil final sans documentation externe.
 
-### AB-022 - Gérer les permissions Android nécessaires
-- Priorite : P1
-- Objectif : demander uniquement les autorisations indispensables au fonctionnement du reveil.
-- Critere d'acceptation : les permissions requises sont demandées au bon moment et leur absence est expliquée clairement.
-
-## Lot 3 - Adaptation simple et fiabilisation MVP
-
-### AB-030 - Enregistrer l'historique local des arrets
-- Priorite : P1
-- Objectif : conserver les informations minimales nécessaires a l'ajustement progressif.
-- Critere d'acceptation : pour chaque reveil, l'application stocke localement l'heure cible, l'heure d'arret et la phase atteinte.
-
-### AB-031 - Ajuster legerement l'anticipation selon l'usage
-- Priorite : P1
-- Objectif : faire varier la preparation de facon simple et explicable selon les reveils precedents.
-- Critere d'acceptation : l'application avance ou retarde legerement le debut de sequence selon une regle visible et bornée.
-
-### AB-032 - Permettre le retour au reglage manuel
-- Priorite : P1
-- Objectif : laisser l'utilisateur annuler l'ajustement automatique.
-- Critere d'acceptation : un reglage permet de revenir instantanément au parametre manuel de reference.
-
-### AB-033 - Assurer le fonctionnement hors ligne du coeur du reveil
-- Priorite : P1
-- Objectif : ne pas dépendre du reseau pour le scenario principal.
-- Critere d'acceptation : le reveil progressif reste utilisable sans connexion une fois configure.
-
-## Lot 4 - Suite logique apres MVP
-
-### AB-040 - Preparer l'extension iOS
-- Priorite : P2
-- Objectif : identifier les écarts de plateforme a traiter apres la stabilisation Android.
-- Critere d'acceptation : une note de cadrage precise ce qui est specifiquement Android et ce qui pourra etre porte sur iOS plus tard.
